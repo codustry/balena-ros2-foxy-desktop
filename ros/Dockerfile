@@ -18,18 +18,20 @@ RUN apt-get update
 RUN apt-get update && apt-get install -y ros-foxy-desktop ros-foxy-demo-nodes-cpp ros-foxy-gazebo-ros2-control-demos xfce4 xinit xserver-xorg xserver-xorg-video-fbdev xinit pciutils xfonts-100dpi xfonts-75dpi xfonts-scalable 
 RUN apt-get install -y python3-argcomplete wget unzip nano build-essential xterm gedit firefox ros-foxy-turtlebot3 ros-foxy-turtlebot3-gazebo ros-foxy-turtlebot3-msgs ros-foxy-dynamixel-sdk ros-foxy-turtlebot3
 
+
+
 ## FOR DEVELOPMENT
 # Install SSH :: ref https://dev.to/s1ntaxe770r/how-to-setup-ssh-within-a-docker-container-i5i
-RUN apt update && apt install  openssh-server sudo -y
-# RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 test 
-# RUN  echo 'test:test' | chpasswd
-
-# RUN  echo 'root:toor' | chpasswd
+RUN apt install  openssh-server sudo -y
 RUN service ssh start
 EXPOSE 22
-
 COPY id_ed25519.pub /root/.ssh/authorized_keys
 COPY sshd_config /etc/ssh/sshd_config
+
+# add Git for VSCode Git Extension clone to function
+RUN apt install git -y
+
+##########
 
 # Configure Enviroment for ROS
 RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
