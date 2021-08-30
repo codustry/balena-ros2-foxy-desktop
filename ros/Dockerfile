@@ -21,10 +21,15 @@ RUN apt-get install -y python3-argcomplete wget unzip nano build-essential xterm
 ## FOR DEVELOPMENT
 # Install SSH :: ref https://dev.to/s1ntaxe770r/how-to-setup-ssh-within-a-docker-container-i5i
 RUN apt update && apt install  openssh-server sudo -y
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 test 
-RUN  echo 'test:test' | chpasswd
-RUN service ssh start
+# RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 test 
+# RUN  echo 'test:test' | chpasswd
 
+# RUN  echo 'root:toor' | chpasswd
+RUN service ssh start
+EXPOSE 22
+
+COPY id_ed25519.pub /root/.ssh/authorized_keys
+COPY sshd_config /etc/ssh/sshd_config
 
 # Configure Enviroment for ROS
 RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc

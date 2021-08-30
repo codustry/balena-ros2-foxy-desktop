@@ -1,5 +1,10 @@
 # balena ROS2 Foxy Desktop container
 
+## Ben Notes
+Currently set ssh to the lowest security. ssh to root without password
+ALternatively, we could use the ssh key to login as root instead. just add the key to the file `id_ed25519.pub`
+
+
 [![balena deploy button](https://www.balena.io/deploy.png)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/balena-io-examples/balena-ros2-foxy-desktop/)
 
 ## Special Note:
