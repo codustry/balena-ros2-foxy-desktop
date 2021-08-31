@@ -25,7 +25,7 @@ RUN apt-get install -y python3-argcomplete wget unzip nano build-essential xterm
 RUN apt install  openssh-server sudo -y
 RUN service ssh start
 EXPOSE 22
-COPY id_ed25519.pub /root/.ssh/authorized_keys
+COPY authorized_keys /root/.ssh/authorized_keys
 COPY sshd_config /etc/ssh/sshd_config
 
 # add Git for VSCode Git Extension clone to function
